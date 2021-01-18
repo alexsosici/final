@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Alex chat app</title>
-</head>
-<body>
-    <h1>Alex chat app</h1>
-    <form action="/chat">
-        <div>
-            <lable>Enter your username :</lable>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <lable>Enter your room id :</lable>
-            <input type="text" name="room"
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+{% else %}
+    <form method="post" action="/login">
+        <input type="text" name="user-name" placeholder="Enter your name"><br>
+        <input type="password" name="user-password" placeholder="Enter your password"><br>
+
+        <button>Submit</button>
+    </form>
+{% endif %}
+{% endblock content %}
+
+# tu bi se korisnik logirao

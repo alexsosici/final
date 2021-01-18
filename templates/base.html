@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Alex chat app{% endblock title %}</title>
+
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+
+    <body>
+        <h1>Alex chat app</h1>
+
+        <p>
+            <a href="/">Chat</a> | <a href="/profile">Profile</a> | <a href="/users">All messages</a>
+        </p>
+
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+
+# u njemu bi imao ime aplikacije i tabove za ulazak u chat, profil ili sve poruke
+
