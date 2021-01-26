@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<h3>Received messages</h3>
 
-</body>
-</html>
-
-# ne znam ako mi ovo treba pod profile za viditi sve dolazne poruke?
+<ul>
+{% for m in rec %}
+    <li><a href="/message/{{ m.id }}">{{m.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}

@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Alex chat app prognoza</title>
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <h1>Weather</h1>
-        <p>Location: {{ data.name }}</p>
-        <p>Weather description: {{ data.weather[0].description }}</p>
-        <p>Current temperature: {{ data.main.temp }}</p>
-        <p>Tlak: {{ data.main.pressure }}</p>
-        <p>Vidljivost: {{ data.visibility }}</p>
-        <p>Brzina vjetra: {{ data.wind.speed }}</p>
-    </body>
-</html>
+{% block content %}
 
-# ovo je za prognozu
+<h2>Alex message app weather</h2>
+{%if city %}
+
+<p>Location: {{ data.name }}</p>
+<p>Current time: {{ time }}</p>
+<p>Weather description: {{ data.weather[0].description }}</p>
+<p>Current temperature: {{ data.main.temp }} °C</p> <br><br>
+<h3>Change location:</h3>
+<form method="post" action="/weather">
+        <input type="text" name="city" placeholder="Enter location"><br>
+        <button>Submit</button>
+</form>
+{% else %}
+<h3>Enter location:</h3>
+<form method="post" action="/weather">
+        <input type="text" name="city" placeholder="Enter location"><br>
+        <button>Submit</button>
+</form>
+{% endif %}
+
+{% endblock content %}

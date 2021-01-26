@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Profile{% endblock title %}
-
 {% block content %}
-<p><strong>Your name:</strong> {{ user.name }}</p>
-<p><strong>Your email:</strong> {{ user.email }}</p>
+<h2>Profile page</h2>
 
-<p><a href="/profile/edit">Sent messages</a></p>
-<p><a href="/profile/delete">Recieved messages</a></p>
+<p>This is your profile page. It is visible to you only.</p>
+
+<h3>Your data:</h3>
+
+<p><strong>Username:</strong> {{user.name}}</p>
+<p><strong>Email:</strong> {{user.email}}</p>
+<p><strong>Location:</strong> {{user.location}}</p>
+<div id="msgs">
+    <p><strong>Received:</strong><a href="/received">{{brpr}}</a> </p>
+    <p><strong>Sent:</strong> <a href="/sent">{{brpo}}</a> </p>
+</div>
+
+<p id="pisi"><strong>Edit new message:</strong><a href="/message_edit"><img border="0" alt="new message" src="/static/img/pisi.png" width="30" height="30"></a> </p>
+
+
 {% endblock content %}
-
-# ovdje bi korisnik ušao u profil i može pogledati sve poruke

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h4>New messsage</h4>
+    <form id="message" method="post" action="/message_edit">
+           <label for="receiver"><h5>To:</h5></label>
+              <select name="receiver" id="receiver">
+                <option disabled selected value> -- chose recipient -- </option>
+                {% for u in users %}
+                    <option>{{ u.name }}</option>
+                {% endfor %}
+              </select><br>
+        <input type="text" name="title" placeholder="Enter message title"><br>
+        <textarea name="poruka" rows="20" cols="50"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}

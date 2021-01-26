@@ -1,1 +1,10 @@
-# ne znam ako mi ovo treba pod profile za viditi sve poslane poruke?
+{% extends "base.html" %}
+{% block content %}
+<h3>Sent messages</h3>
+
+<ul>
+{% for m in sent %}
+    <li><a href="/message/{{ m.id }}">{{m.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}

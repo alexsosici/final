@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% else %}
-    <form method="post" action="/login">
-        <input type="text" name="user-name" placeholder="Enter your name"><br>
-        <input type="password" name="user-password" placeholder="Enter your password"><br>
+<body>
+<h1>Welcome to my Messenger</h1>
 
-        <button>Submit</button>
-    </form>
-{% endif %}
+<p>This webpage is publicly accessible. Please log in to see your protected <a href="/profile">profile page</a>.</p>
+<p><a href="/login">Click to login</a></p>
+</body>
 {% endblock content %}
-
-# tu bi se korisnik logirao

@@ -2,22 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Alex chat app{% endblock title %}</title>
-
+        <title>Alex message app</title>
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
 
     <body>
-        <h1>Alex chat app</h1>
+        <h1>Alex message app</h1>
 
         <p>
-            <a href="/">Chat</a> | <a href="/profile">Profile</a> | <a href="/users">All messages</a>
+            <a href="/">Home</a> |
+            <a href="/profile">My profile</a> |
+            <a href="/logout">Logout</a> |
+            <a href="/weather">Weather</a>
         </p>
-
-        {% block content %}
-        {% endblock content %}
-    </body>
+    {% block content %}
+    {% endblock content %}
+        </body>
 </html>
 
-# u njemu bi imao ime aplikacije i tabove za ulazak u chat, profil ili sve poruke
 
