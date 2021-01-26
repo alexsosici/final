@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>This is the Message:</h3><br>
+<h5>Title: {{message.title}}</h5><br>
+<h5>Sender: {{message.sender}}</h5><br>
+<h5>Recepient: {{message.receiver}}</h5><br><br>
+<h5>Message body:</h5><br>
+<p>{{message.message}}</p><br><br>
+<h5><a href="/message_reply/{{message.id}}">Reply</a></h5>
+{% endblock content %}

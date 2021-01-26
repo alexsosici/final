@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <form id="message" method="post" action="/message_reply/{{message.id}}">
+        <textarea name="poruka" rows="20" cols="50"></textarea> <br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
