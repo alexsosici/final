@@ -1,17 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from datetime import datetime
-import os
-import json
 import requests
 import uuid
 import hashlib
 from model import db, User, Message
 
-
-try:
-    import secrets  # only needed for localhost, that's why it's in the try/except statement
-except Exception as e:
-    pass
 
 app = Flask(__name__)
 db.create_all()
@@ -24,9 +17,9 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method=="GET":
+    if request.method == "GET":
         return render_template("login.html")
-    elif request.method=="POST":
+    elif request.method == "POST":
         session_token = request.cookies.get("session_token")
         if not session_token:
             session_token = str(uuid.uuid4())
@@ -42,7 +35,8 @@ def login():
 
         if not user:
             # create a User object
-            user = User(name=name, email=email, password=hashed_password, location=location, session_token=session_token)
+            user = User(name=name, email=email, password=hashed_password, location=location,
+                        session_token=session_token)
             db.add(user)
             db.commit()
         else:
@@ -60,6 +54,7 @@ def login():
         response = make_response(redirect(url_for("profile")))
         response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
         return response
+
 
 @app.route("/profile")
 def profile():
@@ -95,12 +90,13 @@ def weather():
         city = request.form.get("city")
     unit = "metric"  # use "imperial" for Fahrenheit
     lang = "en"
-    api_key="5272dc9425b14ee904edf1ff01498fc2"
-    url = "https://api.openweathermap.org/data/2.5/weather?q={0}&lang={3}&units={1}&appid={2}".format(city, unit, api_key, lang)
+    api_key = "5272dc9425b14ee904edf1ff01498fc2"
+    url = "https://api.openweathermap.org/data/2.5/weather?q={0}&lang={3}&units={1}&appid={2}".format(city, unit,
+                                                                                                      api_key, lang)
     data = requests.get(url=url)  # GET request to the OpenWeatherMap API
     ts = int(data.json()["dt"]) + data.json()["timezone"]
     time = datetime.utcfromtimestamp(ts).strftime('%H:%M')
-    #print(datetime.utcfromtimestamp(ts).strftime('%H:%M:%S'))
+
     print(time)
     return render_template("prognoza.html", data=data.json(), city=city, time=time)
 
@@ -111,37 +107,38 @@ def message_edit():
     user = db.query(User).filter_by(session_token=session_token).first()
     users = db.query(User).filter(User.name != user.name)
     if request.method == "POST":
-        sender=user.name
-        receiver= request.form.get("receiver")
+        sender = user.name
+        receiver = request.form.get("receiver")
         title = request.form.get("title")
         if title == "":
-            title="°"
+            title = "°"
         message_text = request.form.get("poruka")
-        new_message=Message(sender=sender, receiver=receiver, title=title, message=message_text)
+        new_message = Message(sender=sender, receiver=receiver, title=title, message=message_text)
         db.add(new_message)
         db.commit()
         response = make_response(redirect(url_for("profile")))
         return response
     elif request.method == "GET":
-        return render_template("message_edit.html", users = users)
+        return render_template("message_edit.html", users=users)
 
 
 @app.route("/message_reply/<message_id>", methods=["GET", "POST"])
 def message_reply(message_id):
-    message=db.query(Message).get(int(message_id))
+    message = db.query(Message).get(int(message_id))
     if request.method == "POST":
-        sender=message.receiver
-        receiver= message.sender
+        sender = message.receiver
+        receiver = message.sender
         title = "Re:"+message.title
         message_text = request.form.get("poruka")
         print(message_text)
-        new_message=Message(sender=sender, receiver=receiver, title=title, message=message_text)
+        new_message = Message(sender=sender, receiver=receiver, title=title, message=message_text)
         db.add(new_message)
         db.commit()
         response = make_response(redirect(url_for("profile")))
         return response
     elif request.method == "GET":
         return render_template("message_reply.html", message=message)
+
 
 @app.route("/sent")
 def sent():
@@ -161,7 +158,7 @@ def received():
 
 @app.route("/message/<message_id>")
 def message(message_id):
-    message=db.query(Message).get(int(message_id))
+    message = db.query(Message).get(int(message_id))
     return render_template("message.html", message=message)
 
 
